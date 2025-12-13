@@ -2114,7 +2114,7 @@ ability.flameGuard = {
 }
 
 ability.curseGuard = {
-    type: [`ghost`],
+    type: [`fairy`],
     rarity: 1,
     info: function() {return `Halves the damage received of Ghost-type moves`},
 }
@@ -2168,9 +2168,9 @@ ability.steelGuard = {
 }
 
 ability.dragonGuard = {
-    type: [`dragon`],
+    type: [`fairy`],
     rarity: 1,
-    info: function() {return `Halves the damage received of Steel-type moves`},
+    info: function() {return `Halves the damage received of Dragon-type moves`},
 }
 
 ability.bugGuard = {
@@ -2456,7 +2456,7 @@ ability.flareAbsorb = {
 }
 
 ability.curseAbsorb = {
-    type: [`ghost`],
+    type: [`dark`],
     rarity: 2,
     info: function() {return `Nullifies received Ghost-type moves`},
 }
@@ -2518,7 +2518,7 @@ ability.rivalry = {
 ability.pickPocket = {
     type: [`dark`, `flying`, `normal`],
     rarity: 2,
-    info: function() {return `Increases the chance of getting a rare item from the area by 50%(Can stack)`},
+    info: function() {return `Increases the weight of rare item drops by 1% (Can stack)`},
 }
 
 ability.guts = {
@@ -2615,7 +2615,7 @@ ability.thickFat = {
 ability.adaptability = {
     type: [`all`],
     rarity: 3,
-    info: function() {return `Doubles Same-Type-Attack-Bonus`},
+    info: function() {return `Multiplies Same-Type-Attack-Bonus by x1.2`},
 }
 
 ability.noGuard = {

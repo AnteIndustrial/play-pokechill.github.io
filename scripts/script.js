@@ -20,7 +20,7 @@ function updateGameVersion() {
   }
 
 
-  saved.version = 0.7
+  saved.version = 0.8
   document.getElementById(`game-version`).innerHTML = `v${saved.version}`
 
 }
@@ -392,6 +392,16 @@ guide.statusEffects = {
 guide.shiny = {
   name: `Shiny Pokemon`,
   description: function() { return `At a rate of 1/400, Pokemon can be shiny. These odds can be boosted through different means<br><br>Shiny Pokemon deal 15% more damage. The visual distinction can be toggled from their move menu. This wont affect the damage bonus they get`}
+}
+
+guide.compatibility = {
+  name: `Genetics: Compatibility`,
+  description: function() { return `Compatibility determines how similar the sample is to the host. This influences various parameters such as the chances of inherit, or shiny mutations (only if the sample is shiny)<br><br>Sharing one type with the sample will yield one level of compatibility, whereas sharing two types will increase it by two levels.<br><br>Additionally, if the sample is of the same evolutive line as the host, it will recieve maximum compatibility`}
+}
+
+guide.powerCost = {
+  name: `Genetics: Power Cost`,
+  description: function() { return `Power cost determines how taxing it is to modify the host. This influences the time to complete the operation<br><br>This is determined by the division of the host. A higher division will exponentially increase the time required to modify the Pokemon`}
 }
 
 function setGuide(){

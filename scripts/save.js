@@ -113,21 +113,20 @@ function importData() {
     reader.onload = () => {
       try {
         const data = JSON.parse(reader.result);
-
         localStorage.setItem("gameData", JSON.stringify(data));
 
         loadGame();
+
+        window.location.reload();
       } catch (err) {
         alert("Error loading data.");
       }
     };
 
     reader.readAsText(file);
-    window.location.reload();
   };
 
   input.click();
-  
 }
 
 

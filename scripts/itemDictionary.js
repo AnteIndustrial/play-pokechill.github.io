@@ -210,6 +210,24 @@ item.babiriBerry = {
 }
 
 
+item.luckIncense = {
+    type: "held",
+    info: function() {return `When held: Increases the weight of rare item drops by ${this.power()}%`},
+    power : function() { return 0.5+(0.5*returnItemLevel(this.id))}
+}
+
+item.pureIncense = {//todo
+    type: "held",
+    info: function() {return `When held: Increases the weight of rare pokemon by ${this.power()}%`},
+    power : function() { return 0.5+(0.5*returnItemLevel(this.id))}
+}
+
+item.luckyEgg = {//todo
+    type: "held",
+    info: function() {return `When held: Increases the experience gained by the pokemon by ${this.power()}%`},
+    power : function() { return 0.5+(0.5*returnItemLevel(this.id))}
+}
+
 item.waterStone = {
     evo: true,
     info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
@@ -311,6 +329,64 @@ item.goldenBottleCap = {
     info: function() {return `Obtained in events and the Battle Tower. Can be used in the Item Fabricator (not yet implemented!)`},
 }
 
+item.goldenBottleCap = {
+    type: "key",
+    info: function() {return `Obtained in events and the Battle Tower. Can be used in the Item Fabricator (not yet implemented!)`},
+}
+
+
+
+item.everstone = {
+    type: "key",
+    genetics: true,
+    info: function() {return `Genetics-aiding item: Ensures the Pokemon will retain its original ability`},
+}
+
+item.powerAnklet = {
+    type: "key",
+    genetics: true,
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Speed Iv's`},
+}
+
+item.powerBand = {
+    type: "key",
+    genetics: true,
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Special Defense Iv's`},
+}
+
+item.powerBelt = {
+    type: "key",
+    genetics: true,
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Defense Iv's`},
+}
+
+item.powerBracer = {
+    type: "key",
+    genetics: true,
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Attack Iv's`},
+}
+
+item.powerLens = {
+    type: "key",
+    genetics: true,
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Special Attack Iv's`},
+}
+
+item.powerWeight = {
+    type: "key",
+    genetics: true,
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit HP Iv's`},
+}
+
+
+item.destinyKnot = { //very rare i guess
+    type: "key",
+    genetics: true,
+    info: function() {return `Genetics-aiding item: Swaps the ability of the Pokemon with the sample`},
+}
+
+
+
 
 item.eviolite = {
     type: "held",
@@ -336,43 +412,43 @@ item.mentalHerb = {
 item.thunderousRock = {
     type: "key",
     rotation: 1,
-    info: function() {return `Can be used to catch Zapdos once. Expires after event finishes`},
+    info: function() {return `Can be used to catch event Pokemon. Expires after event finishes`},
 }
 
 item.fieryRock = {
     type: "key",
     rotation: 1,
-    info: function() {return `Can be used to catch Moltres once. Expires after event finishes`},
+    info: function() {return `Can be used to catch event Pokemon. Expires after event finishes`},
 }
 
 item.articRock = {
     type: "key",
     rotation: 1,
-    info: function() {return `Can be used to catch Articuno once. Expires after event finishes`},
+    info: function() {return `Can be used to catch event Pokemon. Expires after event finishes`},
 }
 
 item.ancientOrchid = {
     type: "key",
     rotation: 2,
-    info: function() {return `Can be used to catch a privimite Paradox Pokemon once. Expires after event finishes`},
+    info: function() {return `Can be used to catch event Pokemon. Expires after event finishes`},
 }
 
 item.ancientKeystone = {
     type: "key",
     rotation: 3,
-    info: function() {return `Can be used to catch Regirock once. Expires after event finishes`},
+    info: function() {return `Can be used to catch event Pokemon. Expires after event finishes`},
 }
 
 item.steelKeystone = {
     type: "key",
     rotation: 3,
-    info: function() {return `Can be used to catch Registeel once. Expires after event finishes`},
+    info: function() {return `Can be used to catch event Pokemon. Expires after event finishes`},
 }
 
 item.frozenKeystone = {
     type: "key",
     rotation: 3,
-    info: function() {return `Can be used to catch Regice once. Expires after event finishes`},
+    info: function() {return `Can be used to catch event Pokemon. Expires after event finishes`},
 }
 
 

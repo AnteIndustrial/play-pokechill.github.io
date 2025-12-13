@@ -325,6 +325,34 @@ pkmn.arbok = {
 
 // 025 Pikachu → Raichu
 
+
+pkmn.pichu = {
+    type: ["electric"],
+    bst: {
+        hp: 20,
+        atk: 40,
+        def: 15,
+        satk: 35,
+        sdef: 35,
+        spe: 60,
+    },
+    evolve: function() { return { 1: { pkmn: pkmn.pikachu, happiness: true } } },
+}
+
+pkmn.pikachu = {
+    type: ["electric"],
+    bst: {
+        hp: 35,
+        atk: 55,
+        def: 40,
+        satk: 50,
+        sdef: 50,
+        spe: 90,
+    },
+    evolve: function() { return { 1: { pkmn: pkmn.raichu, item: item.thunderStone } } },
+}
+
+
 pkmn.pikachuBelle = {
     type: ["electric"],
     bst: {
@@ -383,32 +411,6 @@ pkmn.pikachuRockstar = {
         sdef: 80,
         spe: 110,
     }
-}
-
-pkmn.pichu = {
-    type: ["electric"],
-    bst: {
-        hp: 20,
-        atk: 40,
-        def: 15,
-        satk: 35,
-        sdef: 35,
-        spe: 60,
-    },
-    evolve: function() { return { 1: { pkmn: pkmn.pikachu, happiness: true } } },
-}
-
-pkmn.pikachu = {
-    type: ["electric"],
-    bst: {
-        hp: 35,
-        atk: 55,
-        def: 40,
-        satk: 50,
-        sdef: 50,
-        spe: 90,
-    },
-    evolve: function() { return { 1: { pkmn: pkmn.raichu, item: item.thunderStone } } },
 }
 
 pkmn.raichu = {
@@ -1904,7 +1906,7 @@ pkmn.smoochum = {
         sdef: 65,
         spe: 65,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.seaking, level: evolutionLevel2 } } },
+    evolve: function() { return { 1: { pkmn: pkmn.jynx, level: evolutionLevel2 } } },
 }
 
 pkmn.jynx = {
@@ -1929,7 +1931,8 @@ pkmn.elekid = {
         satk: 65,
         sdef: 55,
         spe: 95,
-    }
+    },
+    evolve: function() { return { 1: { pkmn: pkmn.electabuzz, level: evolutionLevel2 } } },
 }
 
 pkmn.electabuzz = {
@@ -1967,7 +1970,8 @@ pkmn.magby = {
         satk: 70,
         sdef: 55,
         spe: 83,
-    }
+    },
+    evolve: function() { return { 1: { pkmn: pkmn.magmar, level: evolutionLevel2 } } },
 }
 
 pkmn.magmar = {
@@ -2023,78 +2027,6 @@ pkmn.tauros = {
 
 // 129 Magikarp → Gyarados
 
-pkmn.magikarpKoi = {
-    type: ["water"],
-    bst: {
-        hp: 100,
-        atk: 10,
-        def: 55,
-        satk: 100,
-        sdef: 20,
-        spe: 80,
-    }
-}
-
-pkmn.magikarpRegal = {
-    type: ["water"],
-    bst: {
-        hp: 100,
-        atk: 10,
-        def: 55,
-        satk: 100,
-        sdef: 20,
-        spe: 80,
-    }
-}
-
-pkmn.magikarpSakura = {
-    type: ["water"],
-    bst: {
-        hp: 100,
-        atk: 10,
-        def: 55,
-        satk: 100,
-        sdef: 20,
-        spe: 80,
-    }
-}
-
-pkmn.magikarpSkelly = {
-    type: ["water"],
-    bst: {
-        hp: 100,
-        atk: 10,
-        def: 55,
-        satk: 100,
-        sdef: 20,
-        spe: 80,
-    }
-}
-
-pkmn.magikarpSoar = {
-    type: ["water"],
-    bst: {
-        hp: 100,
-        atk: 10,
-        def: 55,
-        satk: 100,
-        sdef: 20,
-        spe: 80,
-    }
-}
-
-pkmn.magikarpTiger = {
-    type: ["water"],
-    bst: {
-        hp: 100,
-        atk: 10,
-        def: 55,
-        satk: 100,
-        sdef: 20,
-        spe: 80,
-    }
-}
-
 pkmn.magikarp = {
     type: ["water"],
     bst: {
@@ -2107,6 +2039,80 @@ pkmn.magikarp = {
     },
     evolve: function() { return { 1: { pkmn: pkmn.gyarados, level: evolutionLevel1 } } },
 }
+
+
+pkmn.magikarpKoi = {
+    type: ["water"],
+    bst: {
+        hp: 120,
+        atk: 20,
+        def: 80,
+        satk: 100,
+        sdef: 80,
+        spe: 80,
+    }
+}
+
+pkmn.magikarpRegal = {
+    type: ["water"],
+    bst: {
+        hp: 120,
+        atk: 20,
+        def: 80,
+        satk: 100,
+        sdef: 80,
+        spe: 80,
+    }
+}
+
+pkmn.magikarpSakura = {
+    type: ["water"],
+    bst: {
+        hp: 120,
+        atk: 20,
+        def: 80,
+        satk: 100,
+        sdef: 80,
+        spe: 80,
+    }
+}
+
+pkmn.magikarpSkelly = {
+    type: ["water"],
+    bst: {
+        hp: 120,
+        atk: 20,
+        def: 80,
+        satk: 100,
+        sdef: 80,
+        spe: 80,
+    }
+}
+
+pkmn.magikarpSoar = {
+    type: ["water"],
+    bst: {
+        hp: 120,
+        atk: 20,
+        def: 80,
+        satk: 100,
+        sdef: 80,
+        spe: 80,
+    }
+}
+
+pkmn.magikarpTiger = {
+    type: ["water"],
+    bst: {
+        hp: 120,
+        atk: 20,
+        def: 80,
+        satk: 100,
+        sdef: 80,
+        spe: 80,
+    }
+}
+
 
 pkmn.gyarados = {
     type: ["water","flying"],
@@ -3282,22 +3288,22 @@ pkmn.unownZ = {
 pkmn.unownExclamation = {
     type: ["psychic"],
     bst: {
-        hp: 48,
+        hp: 80,
         atk: 72,
         def: 48,
-        satk: 72,
-        sdef: 48,
+        satk: 100,
+        sdef: 120,
         spe: 48,
     }
 }
 pkmn.unownQuestion = {
     type: ["psychic"],
     bst: {
-        hp: 48,
+        hp: 80,
         atk: 72,
         def: 48,
-        satk: 72,
-        sdef: 48,
+        satk: 100,
+        sdef: 120,
         spe: 48,
     }
 }
@@ -9972,7 +9978,7 @@ pkmn.primarina = {
     atk: 74,
     def: 74,
     satk: 126,
-    sdef: 116,
+    sdef: 100,
     spe: 60,
   },
 }
