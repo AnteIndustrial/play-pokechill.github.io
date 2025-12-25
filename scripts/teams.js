@@ -102,8 +102,8 @@ function updatePreviewTeam(){
 
     let nameTag = ""
     if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===1 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) nameTag += ` ⛔`
-    if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===2 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[saved.currentPreviewTeam[i].pkmn])!="D")) nameTag += ` ⛔`
-    if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===3 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="A" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[saved.currentPreviewTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[saved.currentPreviewTeam[i].pkmn])!="D")) nameTag += ` ⛔`
+    if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===2 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) nameTag += ` ⛔`
+    if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===3 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="A" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) nameTag += ` ⛔`
     
     let pkmnName = `${format(currentTeam[i].pkmn)} ${nameTag} <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[ currentTeam[i].pkmn ].level}</span>`
     if (pkmn[currentTeam[i].pkmn].shiny) pkmnName = `${format(currentTeam[i].pkmn)} ${nameTag} <span style="color:#FF4671;">✦</span> <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[ currentTeam[i].pkmn ].level}</span>`
@@ -225,7 +225,8 @@ function injectPreviewTeam(){
     const currentTeam = saved.previewTeams[saved.currentPreviewTeam]
 
     let frontierError = false
-    for (const i in saved.currentPreviewTeam) {
+    for (const i in currentTeam) {
+        if (currentTeam[i].pkmn == undefined) continue
         if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===1 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) frontierError = true
         if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===2 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) frontierError = true
         if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===3 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="A" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) frontierError = true
