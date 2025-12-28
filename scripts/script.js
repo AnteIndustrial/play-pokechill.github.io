@@ -153,7 +153,7 @@ function updateGameVersion() {
 
 
 
-  saved.version = 1.7
+  saved.version = 1.8
   document.getElementById(`game-version`).innerHTML = `v${saved.version}`
 }
 
@@ -516,7 +516,7 @@ guide.stab = {
 
 guide.battleFatigue = {
   name: `Battle: Battle Fatigue`,
-  description: function() { return `Pokemon lose a very small fraction of their maximum health when attacking.<br><br>Refreshing the browser restores their health back to full` }
+  description: function() { return `Pokemon lose a very small fraction of their maximum health when attacking. This damage can be mitigated by a sum of the HP, Defense and Special Defense of the Pokemon, meaning bulkier Pokemon can battle for longer` }
 }
 
 guide.statusEffects = {

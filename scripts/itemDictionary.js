@@ -21,6 +21,7 @@ item.charcoal = {
 
 item.dragonFang = {
     type: "held",
+    evo: true,
     info: function() {return `When held: Increase the power of Dragon-Type moves by ${this.power()}%`},
     power : function() { return 10+(10*returnItemLevel(this.id))}
 }

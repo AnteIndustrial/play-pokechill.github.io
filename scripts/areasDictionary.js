@@ -853,7 +853,7 @@ areas.berryForest = {
     background : `forest`,
     icon: pkmn.girafarig,
     spawns: {
-        common : [pkmn.whimsicott,pkmn.girafarig, pkmn.petilil],
+        common : [pkmn.cottonee,pkmn.girafarig, pkmn.petilil],
         uncommon : [pkmn.drowzee],
         rare : [pkmn.treecko]
     },
