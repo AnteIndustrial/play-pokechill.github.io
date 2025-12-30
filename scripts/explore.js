@@ -1874,6 +1874,13 @@ const sortedMovepool = movepool
 
     const moveId = e
 
+        //prevents having moves, but not being equiped (safefail) //fix
+    if (pkmn[el.dataset.pkmnEditor].moves.slot1 == undefined && pkmn[el.dataset.pkmnEditor].moves.slot1!= e && pkmn[el.dataset.pkmnEditor].moves.slot2!= e && pkmn[el.dataset.pkmnEditor].moves.slot3!= e && pkmn[el.dataset.pkmnEditor].moves.slot4!= e) pkmn[el.dataset.pkmnEditor].moves.slot1 = e
+    if (pkmn[el.dataset.pkmnEditor].moves.slot2 == undefined && pkmn[el.dataset.pkmnEditor].moves.slot1!= e && pkmn[el.dataset.pkmnEditor].moves.slot2!= e && pkmn[el.dataset.pkmnEditor].moves.slot3!= e && pkmn[el.dataset.pkmnEditor].moves.slot4!= e) pkmn[el.dataset.pkmnEditor].moves.slot2 = e
+    if (pkmn[el.dataset.pkmnEditor].moves.slot3 == undefined && pkmn[el.dataset.pkmnEditor].moves.slot1!= e && pkmn[el.dataset.pkmnEditor].moves.slot2!= e && pkmn[el.dataset.pkmnEditor].moves.slot3!= e && pkmn[el.dataset.pkmnEditor].moves.slot4!= e) pkmn[el.dataset.pkmnEditor].moves.slot3 = e
+    if (pkmn[el.dataset.pkmnEditor].moves.slot4 == undefined && pkmn[el.dataset.pkmnEditor].moves.slot1!= e && pkmn[el.dataset.pkmnEditor].moves.slot2!= e && pkmn[el.dataset.pkmnEditor].moves.slot3!= e && pkmn[el.dataset.pkmnEditor].moves.slot4!= e) pkmn[el.dataset.pkmnEditor].moves.slot4 = e
+
+
     const divMove = document.createElement("div") 
     divMove.className = "pkmn-movebox"
     divMove.style.borderColor = returnTypeColor(move[ moveId ].type)
@@ -6421,5 +6428,6 @@ window.addEventListener('load', function() {
 
     //updateTeamExp()
 });
+
 
 
