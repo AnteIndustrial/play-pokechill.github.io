@@ -239,13 +239,34 @@ function setWildPkmn(){
 
     hpMultiplier = 5;
     if (areas.training.tier==2) hpMultiplier = 10;
-    if (areas.training.tier==3) hpMultiplier = 20;
+    if (areas.training.tier==3) hpMultiplier = 30;
 
     areaDivision = numericDivision(areaDivision, "inverse")
 
-    
+    //attempts a safe approach
+    spawnedPkmn = randomDivisionPkmn(areaDivision, typeWeak(pkmn[saved.trainingPokemon].type[0],pkmn[saved.trainingPokemon].type[1],1), undefined, undefined, "training")
+    if (pkmn[saved.trainingPokemon].type[1] != undefined && rng(0.5)) spawnedPkmn = randomDivisionPkmn(areaDivision, typeWeak(pkmn[saved.trainingPokemon].type[0],pkmn[saved.trainingPokemon].type[1],2), undefined, undefined, "training")
+
+
+
+    //if it cant, safe of a higher division
+    if (!pkmn[spawnedPkmn]) {
+    areaDivision = numericDivision(areaDivision)
+    areaDivision--
+    areaDivision = numericDivision(areaDivision, "inverse")
+
+    spawnedPkmn = randomDivisionPkmn(areaDivision, typeWeak(pkmn[saved.trainingPokemon].type[0],pkmn[saved.trainingPokemon].type[1],1), undefined, undefined, "training")
+    if (pkmn[saved.trainingPokemon].type[1] != undefined && rng(0.5)) spawnedPkmn = randomDivisionPkmn(areaDivision, typeWeak(pkmn[saved.trainingPokemon].type[0],pkmn[saved.trainingPokemon].type[1],2), undefined, undefined, "training")
+    }
+
+    //if still cant, unsafe of same division, out of luck
+    if (!pkmn[spawnedPkmn]) {
+    areaDivision = numericDivision(returnPkmnDivision(pkmn[saved.trainingPokemon]))
+    areaDivision = numericDivision(areaDivision, "inverse")
+
     spawnedPkmn = randomDivisionPkmn(areaDivision, typeWeak(pkmn[saved.trainingPokemon].type[0],pkmn[saved.trainingPokemon].type[1],1))
     if (pkmn[saved.trainingPokemon].type[1] != undefined && rng(0.5)) spawnedPkmn = randomDivisionPkmn(areaDivision, typeWeak(pkmn[saved.trainingPokemon].type[0],pkmn[saved.trainingPokemon].type[1],2))
+    }
 
 
     wildLevel = pkmn[saved.trainingPokemon].level
@@ -1686,7 +1707,7 @@ document.addEventListener("contextmenu", e => {
         if (el.dataset.help === `Dungeons`) document.getElementById("tooltipBottom").innerHTML = `Pokemon in Dungeons can't be caught, but they can drop useful items and EXP. Dungeons rotate every day aswell`
 
         if (el.dataset.help === `Training`) document.getElementById("tooltipTitle").innerHTML = `Training`
-        if (el.dataset.help === `Training`) document.getElementById("tooltipBottom").innerHTML = `Challenge your Pokemon against waves of foes in order to get stronger. You will naturally have typing advantadge against Pokemon fought against, and their level will scale to yours<br><br>Failing a training will result in no gains`
+        if (el.dataset.help === `Training`) document.getElementById("tooltipBottom").innerHTML = `Challenge your Pokemon against waves of foes in order to get stronger. You will naturally have typing advantadge against Pokemon fought against, and their level will scale to yours. Type Immunities inside training will be instead converted to resistances<br><br>Failing a training will result in no gains`
 
         if (el.dataset.help === `Events`) document.getElementById("tooltipTitle").innerHTML = `Events`
         if (el.dataset.help === `Events`) document.getElementById("tooltipBottom").innerHTML = `Events might house both items and Pokemon to get. Events marked with a skull signify powerful foes that usually require an item to catch (The item wont be consumed if failed to defeat). All Events rotate every three days.`
@@ -2572,7 +2593,7 @@ function exploreCombatPlayer() {
 
 
         //abilities
-        if (testAbility(`active`, ability.technician.id) && movePower<60 ) movePower *= 1.5
+        if (testAbility(`active`, ability.technician.id) && movePower<=60 ) movePower *= 1.5
 
 
         let multihit = 1
@@ -2851,7 +2872,7 @@ function exploreCombatPlayer() {
 
 
         let dotDamage = 50
-        if (areas[saved.currentArea]?.trainer || saved.currentArea == areas.frontierSpiralingTower.id || saved.currentArea == areas.training.id) dotDamage = 12
+        if (areas[saved.currentArea]?.trainer || saved.currentArea == areas.frontierSpiralingTower.id) dotDamage = 12
 
         if (team[exploreActiveMember].buffs?.burn>0 && !testAbility(`active`, ability.flareBoost.id)) {attacker.playerHp -=  attacker.playerHpMax/dotDamage;}
         if (team[exploreActiveMember].buffs?.poisoned>0  && !testAbility(`active`, ability.toxicBoost.id)) {attacker.playerHp -=  attacker.playerHpMax/dotDamage;}
@@ -3530,7 +3551,7 @@ function initialiseArea(){
     if (team[exploreActiveMember].buffs[i]>0) team[exploreActiveMember].buffs[i] = 0
     } 
 
-            //reset move buildup, ie rollout
+    //reset move buildup, ie rollout
     for (const moveID in move) if(move[moveID].buildup!==undefined) move[moveID].buildup = 0
     
     updateTeamBuffs()
@@ -5265,7 +5286,7 @@ for (const i in areas) {
     return arrayPick(selection,undefined,rng)
 }*/
 
-function randomDivisionPkmn(division, type, exclude, seed) {
+function randomDivisionPkmn(division, type, exclude, seed, mod) {
   const selection = [];
 
   const rng = seed === undefined
@@ -5278,6 +5299,11 @@ function randomDivisionPkmn(division, type, exclude, seed) {
     if (!pkmn[i].type.includes(type)) continue;
     if (i.includes("unown")) continue;
     if (exclude && exclude.includes(pkmn[i].id)) continue;
+
+    if (mod=="training") {
+        if ( typeEffectiveness([ pkmn[i].type[1] ], pkmn[saved.trainingPokemon].type) >1 ) continue
+        if ( typeEffectiveness([ pkmn[i].type[0] ], pkmn[saved.trainingPokemon].type) >1 ) continue
+    }
 
     selection.push(i);
   }
@@ -6258,7 +6284,7 @@ if (mod==="end"){
     summaryTags += `<div style="filter:hue-rotate(-50deg)">★ Ability swapped!</div>`
     } else {
     const newAbility = learnPkmnAbility(saved.geneticHost)
-    if (item!=="everstone") {pkmn[saved.geneticHost].ability = newAbility; summaryTags += `<div style="filter:hue-rotate(-50deg)">★ New abiltiy: ${format(newAbility)}!</div>`}
+    if (item!=="everstone") {pkmn[saved.geneticHost].ability = newAbility; summaryTags += `<div style="filter:hue-rotate(-50deg)">★ New ability: ${format(newAbility)}!</div>`}
     }
 
     pkmn[saved.geneticHost].movepool = []
@@ -6388,7 +6414,7 @@ const training = {}
 
 training.level = {
     name: `Level Training`,
-    info: `Gain 5-10 Pokemon Levels`,
+    info: `Gain 5-10 Pokemon Levels. Can only be done with less than Level 100`,
     tier: 1,
     color: `#dfc969`,
     condition: function() { if (pkmn[saved.trainingPokemon].level<100 && areas.vsEliteTrainerCynthia.defeated == true) return true },
@@ -6418,7 +6444,7 @@ training.level = {
 
 training.iv1 = { //disapears if you have more than x ivs
     name: `IV Training I`,
-    info: `Gain 2 random IV stars, up to a maximum of 2 per stat`,
+    info: `Gain 2 random IV stars. Can only be done with less than 10 IV stars`,
     tier: 1,
     color: `#699edf`,
     condition: function() {
@@ -6471,7 +6497,7 @@ training.iv1 = { //disapears if you have more than x ivs
 
 training.iv2 = { //doesnt appear until you have more than x ivs
     name: `IV Training II`,
-    info: `Gain 2 random IV stars, up to a maximum of 4 per stat`,
+    info: `Gain 2 random IV stars. Can only be done with less than 22 IV stars`,
     tier: 2,
     color: `#699edf`,
     condition: function() {
@@ -6524,7 +6550,7 @@ training.iv2 = { //doesnt appear until you have more than x ivs
 
 training.iv3 = { //doesnt appear until you have more than x ivs
     name: `IV Training III`,
-    info: `Gain 2 random IV stars, up to a maximum of 6 per stat`,
+    info: `Gain 2 random IV stars`,
     tier: 3,
     color: `#699edf`,
     condition: function() {
@@ -6617,7 +6643,7 @@ training.hiddenAbility = {
 
 training.move = { //disapears if you have 20+ moves or smth
     name: `Move Training`,
-    info: `Learn a new Pokemon Move`,
+    info: `Learn a new Pokemon Move. Can only be done with less than 20 moves`,
     tier: 1,
     color: `#cf79c1`,
     condition: function() { if (pkmn[saved.trainingPokemon].movepool.length<20) return true },
@@ -6675,12 +6701,12 @@ function setTrainingMenu() {
     for (const i in training){
 
     if (saved.trainingPokemon==undefined) continue
-    if (training[i].condition && training[i].condition()!=true) continue
 
     const div = document.createElement("div");
     div.className = "training-module";
     div.style.borderColor = training[i].color
     div.dataset.training = i
+    if (training[i].condition && training[i].condition()!=true) div.style.filter = "brightness(0.5)"
 
     div.innerHTML = `
     <span>${training[i].name}</span>
@@ -6695,6 +6721,7 @@ function setTrainingMenu() {
 
 
     div.addEventListener("click", e => { 
+        if (training[i].condition && training[i].condition()!=true) return
         areas.training.tier = training[i].tier
         areas.training.currentTraining = i
         afkSeconds = 0
@@ -6719,8 +6746,8 @@ function setTrainingMenu() {
         saved.currentArea = areas.training.id
         saved.lastAreaJoined = areas.training.id
         document.getElementById("content-explore").style.display = "flex"
-        initialiseArea()
         document.getElementById(`training-menu`).style.display = `none`;
+        initialiseArea()
     }, 500);
 
     })
