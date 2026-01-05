@@ -2581,7 +2581,7 @@ function exploreCombatPlayer() {
 
 
         //abilities
-        if (testAbility(`active`, ability.technician.id) && movePower<60 ) movePower *= 1.5
+        if (testAbility(`active`, ability.technician.id) && movePower<=60 ) movePower *= 1.5
 
 
         let multihit = 1
@@ -6397,7 +6397,7 @@ const training = {}
 
 training.level = {
     name: `Level Training`,
-    info: `Gain 5-10 Pokemon Levels`,
+    info: `Gain 5-10 Pokemon Levels. Can only be done with less than Level 100`,
     tier: 1,
     color: `#dfc969`,
     condition: function() { if (pkmn[saved.trainingPokemon].level<100 && areas.vsEliteTrainerCynthia.defeated == true) return true },
@@ -6427,7 +6427,7 @@ training.level = {
 
 training.iv1 = { //disapears if you have more than x ivs
     name: `IV Training I`,
-    info: `Gain 2 random IV stars`,
+    info: `Gain 2 random IV stars. Can only be done with less than 10 IV stars`,
     tier: 1,
     color: `#699edf`,
     condition: function() {
@@ -6480,7 +6480,7 @@ training.iv1 = { //disapears if you have more than x ivs
 
 training.iv2 = { //doesnt appear until you have more than x ivs
     name: `IV Training II`,
-    info: `Gain 2 random IV stars`,
+    info: `Gain 2 random IV stars. Can only be done with less than 22 IV stars`,
     tier: 2,
     color: `#699edf`,
     condition: function() {
@@ -6626,7 +6626,7 @@ training.hiddenAbility = {
 
 training.move = { //disapears if you have 20+ moves or smth
     name: `Move Training`,
-    info: `Learn a new Pokemon Move`,
+    info: `Learn a new Pokemon Move. Can only be done with less than 20 moves`,
     tier: 1,
     color: `#cf79c1`,
     condition: function() { if (pkmn[saved.trainingPokemon].movepool.length<20) return true },
