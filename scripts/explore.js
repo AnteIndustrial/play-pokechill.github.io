@@ -2340,7 +2340,7 @@ function returnItemLevel(id, mod) {
 
 function shouldCombatStop(){
 
-    //if (document.getElementById(`tooltipBackground`).style.display === "flex") return true
+    if (document.getElementById(`tooltipBackground`).style.display === "flex") return true
     //if (document.getElementById(`pkmn-editor`).style.display === "flex") return true
     //if (document.getElementById(`team-menu`).style.display === "flex") return true
     //if (document.getElementById(`item-menu`).style.display === "flex") return true
@@ -7014,3 +7014,4 @@ window.addEventListener('load', function() {
 
     //updateTeamExp()
 });
+
