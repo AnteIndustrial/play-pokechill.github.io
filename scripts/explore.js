@@ -239,7 +239,7 @@ function setWildPkmn(){
 
     hpMultiplier = 5;
     if (areas.training.tier==2) hpMultiplier = 10;
-    if (areas.training.tier==3) hpMultiplier = 30;
+    if (areas.training.tier==3) hpMultiplier = 25;
 
     areaDivision = numericDivision(areaDivision, "inverse")
 
@@ -6988,3 +6988,4 @@ window.addEventListener('load', function() {
 
     //updateTeamExp()
 });
+
