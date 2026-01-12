@@ -6043,7 +6043,7 @@ function loop() {
     
     afkSecondsGenetics += elapsed;
 
-    if (afkSeconds>0 && document.getElementById("content-explore").style.display == "flex") document.getElementById("afk-overlay").style.display = "flex"
+    if (afkSeconds>0 && document.getElementById("content-explore").style.display == "flex" && document.getElementById(`tooltipBackground`).style.display !== "flex") document.getElementById("afk-overlay").style.display = "flex"
     else document.getElementById("afk-overlay").style.display = "none"
 
     
@@ -7526,3 +7526,4 @@ window.addEventListener('load', function() {
 
     //updateTeamExp()
 });
+
