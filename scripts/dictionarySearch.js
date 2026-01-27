@@ -263,6 +263,11 @@ function setSearchTags() {
         if ( exclusiveFrontierPkmn.includes(pkmn[e]) ) pkmn[e].tagObtainedIn = "frontier"
         if (pkmn[e].pokerus) pkmn[e].tagPokerus = "pokerus"
     }
+
+    for (const i in shop){
+        if (shop[i].pkmn == undefined) continue
+        pkmn[shop[i].pkmn].tagObtainedIn = "mart";
+    }
     
     
     //only required for unobtainable pokes
@@ -281,6 +286,8 @@ function setSearchTags() {
                 }
             }
         }
+
+        if (e == pkmn.arceus.id) pkmn[e].tagObtainedIn = "arceus";
     }
 }
 

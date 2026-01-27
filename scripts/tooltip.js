@@ -326,7 +326,7 @@ function tooltipData(category, ttdata){
 
 
         if (ttdata === `searchDictionary`) document.getElementById("tooltipTitle").innerHTML = `Keywords`
-        if (ttdata === `searchDictionary`) document.getElementById("tooltipBottom").innerHTML = `Operators:<br>![keyword]: Exclude from search<br>[keywordA] or [keywordB]: Search keywordA OR keywordB<br>[keywordA] [keywordB]: Search for keywordA AND keywordB<br><br>Pokemon keywords:<br>unobtainable, wild, park, event, frontier, shiny, caught, [type], [hidden ability]<br><br>Move keywords:<br>physical, special, [type], [ability]`
+        if (ttdata === `searchDictionary`) document.getElementById("tooltipBottom").innerHTML = `Operators:<br>![keyword]: Exclude from search<br>[keywordA] or [keywordB]: Search keywordA OR keywordB<br>[keywordA] [keywordB]: Search for keywordA AND keywordB<br><br>Pokemon keywords:<br>unobtainable, wild, park, event, frontier, mart, shiny, caught, [type], [hidden ability]<br><br>Move keywords:<br>physical, special, [type], [ability]`
         if (ttdata === `searchDictionary`) document.getElementById("dictionary-search").blur()
 
 
@@ -1151,6 +1151,8 @@ const sortedMovepool = movepool
         if (eventSpawn != "") spawnLocation += `<span>Found in the event ${format(eventSpawn)} (Rotation ${areas[eventSpawn].rotation})</span>`
         if (spawnLocation == "") spawnLocation = `This Pokemon cannot be caught on its current stage`
         if (pkmn[ttdata].tagObtainedIn == "unobtainable") spawnLocation = `This Pokemon is unobtainable`
+        if (pkmn[ttdata].tagObtainedIn == "mart") spawnLocation = `Can be purchased in the Poke-Mart`
+        if (pkmn[ttdata].tagObtainedIn == "arceus") spawnLocation = `Unlocked while all obtainable Pokemon have been caught`
 
         document.getElementById("tooltipMid").innerHTML = `
         <span style="display:flex; flex-direction:column">${spawnLocation}<span>

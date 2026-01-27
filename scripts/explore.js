@@ -901,6 +901,7 @@ function leaveCombat(){
         if (team[slot].item == item.shinyCharm.id) shinyPkmnChance *= (item.shinyCharm.power() /100) +1
         if (team[slot].item == item.shinyCharm.id) shinyPkmnChanceEncounter *= (item.shinyCharm.power() /100) +1
         if (testAbility(slot, ability.goodAsGold.id) ) shinyPkmnChance *= 1.15
+        if (testAbility(slot, ability.goodAsGold.id) ) shinyPkmnChanceEncounter *= 1.15
     }
 
     if (saved.hasTeatimeBeenUsed == true){
