@@ -8090,6 +8090,7 @@ window.addEventListener('load', function() {
     saved.lastExportReset ??= Date.now();
     saved.currentPreviewNumber ??= 1;
     saved.weatherCooldown ??= 0
+    saved.wonderTradeClaimed ??= false;
 
     requestAnimationFrame(loop);
 
@@ -8103,3 +8104,4 @@ window.addEventListener('load', function() {
     arceusCheck()
     //updateTeamExp()
 });
+
