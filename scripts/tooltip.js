@@ -336,7 +336,7 @@ function tooltipData(category, ttdata){
     <div class="arena-card-title">
     Level 100
     <span>
-    Reward: x2<img  src="img/items/goldenBottlecap.png">
+    Reward: x2<img  src="img/items/goldenBottleCap.png">
     </span>
     </div>
 
@@ -348,7 +348,7 @@ function tooltipData(category, ttdata){
     <div class="arena-card-title">
     Level 125
     <span>
-    Reward: x3<img  src="img/items/goldenBottlecap.png">
+    Reward: x3<img  src="img/items/goldenBottleCap.png">
     </span>
     </div>
     <div id="arena-card-2-info" class="arena-card-info">
@@ -359,7 +359,7 @@ function tooltipData(category, ttdata){
     <div class="arena-card-title">
     Level 150
     <span>
-    Reward: x4<img  src="img/items/goldenBottlecap.png">
+    Reward: x4<img  src="img/items/goldenBottleCap.png">
     </span>
     </div>
     <div id="arena-card-3-info" class="arena-card-info">
