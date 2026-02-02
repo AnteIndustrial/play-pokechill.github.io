@@ -2557,15 +2557,15 @@ function exploreCombatPlayer() {
         if (areas[saved.currentArea].fieldEffect?.includes(field.serendipity.id) && nextMove.hitEffect) {nextMove.hitEffect("wild")}
 
         if (areas[saved.currentArea].fieldEffect?.includes(field.heavyWeather.id) && saved.weatherTimer>0) {
-        if (saved.weather=="sunny" && !pkmn[saved.currentPkmn].type.includes("fire") ) attacker.playerHp -= attacker.playerHpMax/15
-        if (saved.weather=="rainy" && !pkmn[saved.currentPkmn].type.includes("water") ) attacker.playerHp -= attacker.playerHpMax/15
-        if (saved.weather=="sandstorm" && (!pkmn[saved.currentPkmn].type.includes("rock") || !pkmn[saved.currentPkmn].type.includes("ground"))) attacker.playerHp -= attacker.playerHpMax/15
-        if (saved.weather=="hail" && !pkmn[saved.currentPkmn].type.includes("ice") ) attacker.playerHp -= attacker.playerHpMax/15
-        if (saved.weather=="foggy" && (!pkmn[saved.currentPkmn].type.includes("ghost") || !pkmn[saved.currentPkmn].type.includes("dark"))) attacker.playerHp -= attacker.playerHpMax/15
-        if (saved.weather=="electricTerrain" && (!pkmn[saved.currentPkmn].type.includes("electric") || !pkmn[saved.currentPkmn].type.includes("steel"))) attacker.playerHp -= attacker.playerHpMax/15
-        if (saved.weather=="mistyTerrain" && (!pkmn[saved.currentPkmn].type.includes("electric") || !pkmn[saved.currentPkmn].type.includes("steel"))) attacker.playerHp -= attacker.playerHpMax/15
-        if (saved.weather=="electricTerrain" && (!pkmn[saved.currentPkmn].type.includes("fairy") || !pkmn[saved.currentPkmn].type.includes("psychic"))) attacker.playerHp -= attacker.playerHpMax/15
-        if (saved.weather=="grassyTerrain" && (!pkmn[saved.currentPkmn].type.includes("grass") || !pkmn[saved.currentPkmn].type.includes("bug"))) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="sunny" && !attacker.type.includes("fire") ) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="rainy" && !attacker.type.includes("water") ) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="sandstorm" && (!attacker.type.includes("rock") || !attacker.type.includes("ground"))) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="hail" && !attacker.type.includes("ice") ) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="foggy" && (!attacker.type.includes("ghost") || !attacker.type.includes("dark"))) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="electricTerrain" && (!attacker.type.includes("electric") || !attacker.type.includes("steel"))) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="mistyTerrain" && (!attacker.type.includes("electric") || !attacker.type.includes("steel"))) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="electricTerrain" && (!attacker.type.includes("fairy") || !attacker.type.includes("psychic"))) attacker.playerHp -= attacker.playerHpMax/15
+        if (saved.weather=="grassyTerrain" && (!attacker.type.includes("grass") || !attacker.type.includes("bug"))) attacker.playerHp -= attacker.playerHpMax/15
         }
 
 
