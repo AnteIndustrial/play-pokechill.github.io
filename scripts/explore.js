@@ -4336,7 +4336,9 @@ function updateEventCounters() {
 
 let raidTimer = 60
 function updateRaidTimer(){
+
     if (areas[saved.currentArea]?.timed == undefined) return
+    if (shouldCombatStop()) return
     raidTimer--
     
     const minutes = Math.floor(raidTimer / 60)
