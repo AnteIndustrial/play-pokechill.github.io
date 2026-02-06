@@ -712,37 +712,37 @@ item.everstone = {
 item.powerAnklet = {
     type: "key",
     genetics: true,
-    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Speed Iv's`},
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Speed IVs`},
 }
 
 item.powerBand = {
     type: "key",
     genetics: true,
-    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Special Defense Iv's`},
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Special Defense IVs`},
 }
 
 item.powerBelt = {
     type: "key",
     genetics: true,
-    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Defense Iv's`},
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Defense IVs`},
 }
 
 item.powerBracer = {
     type: "key",
     genetics: true,
-    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Attack Iv's`},
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Attack IVs`},
 }
 
 item.powerLens = {
     type: "key",
     genetics: true,
-    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Special Attack Iv's`},
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit Special Attack IVs`},
 }
 
 item.powerWeight = {
     type: "key",
     genetics: true,
-    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit HP Iv's`},
+    info: function() {return `Genetics-aiding item: Multiplies by 20 the chance to inherit HP IVs`},
 }
 
 item.lockCapsule = {
