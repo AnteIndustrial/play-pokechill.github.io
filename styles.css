@@ -5870,6 +5870,21 @@ transform: translateY(-1rem);
     flex-direction: column;
 }
 
+.decor-content div{
+    width: 100%;
+    color: white;
+    opacity: 0.4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0.5rem;
+    text-align: center;
+    pointer-events: none;
+    padding: 0.5rem;
+
+}
+
 .decor-content .sprite-trim{
     scale: 2;
     image-rendering: pixelated;
