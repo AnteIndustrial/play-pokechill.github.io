@@ -4011,6 +4011,7 @@ move.spectralThief = {
     hitEffect: function(target) { 
 
     for (const buff in wildBuffs){
+    if (/burn|freeze|confused|paralysis|poisoned|sleep/.test(buff)) continue
     if (wildBuffs[buff]) moveBuff("wild",buff,"self");
     wildBuffs[buff] = 0
     }
@@ -4329,7 +4330,7 @@ move.tailGlow = { //new
 }
 
 move.luminaCrash = { //new
-    split: "physical",
+    split: "special",
     type: "psychic",
     power: t4Base/1.2,
     timer: defaultPlayerMoveTimer*1.2,

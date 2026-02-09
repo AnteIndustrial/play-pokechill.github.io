@@ -233,12 +233,33 @@ function editTeamName(){
 
     document.getElementById("team-name-field").addEventListener("keydown", e => {
         if (e.key === "Enter") {
+
+
+                if (document.getElementById("team-name-field") && 
+        document.getElementById("team-name-field").value != "") {
+        saved.previewTeams[saved.currentPreviewTeam].name = 
+            document.getElementById("team-name-field").value;
+        changeTeamNames();
+    }
+
+
+
+
+
         document.getElementById("team-name-field").blur()
+        closeTooltip()
         }
     });
 
     openTooltip()
 }
+
+
+
+
+
+
+
 
 function changeTeamNames(){
     const select = document.getElementById("team-slot-selector");
@@ -282,11 +303,13 @@ function injectPreviewTeam(){
     const currentTeam = saved.previewTeams[saved.currentPreviewTeam]
 
     let frontierError = false
+    let nuzlockeError = false
     for (const i in currentTeam) {
         if (currentTeam[i].pkmn == undefined) continue
         if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===1 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) frontierError = true
         if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===2 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) frontierError = true
         if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===3 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="A" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) frontierError = true
+        if (saved.gamemodNuzlocke == true && pkmn[currentTeam[i].pkmn].nuzlocked == true) nuzlockeError = true
     }
 
     if (frontierError) {
@@ -294,6 +317,15 @@ function injectPreviewTeam(){
         document.getElementById("tooltipBottom").style.display = "none"
         document.getElementById("tooltipTitle").innerHTML = `Banned Pokemon`
         document.getElementById("tooltipMid").innerHTML = `One or more Pokemon in the current team do not met the division restrictions of the current league`
+        openTooltip()
+        return
+    }
+
+    if (nuzlockeError) {
+        document.getElementById("tooltipTop").style.display = "none"
+        document.getElementById("tooltipBottom").style.display = "none"
+        document.getElementById("tooltipTitle").innerHTML = `Restricted Pokemon`
+        document.getElementById("tooltipMid").innerHTML = `One or more Pokemon in the current team cannot be used as per Nuzlocke restrictions`
         openTooltip()
         return
     }
@@ -479,7 +511,7 @@ function switchMember(member){
         if (team[exploreActiveMember].item == item.choiceBand.id) return
         if (testAbility(`active`,  ability.gorillaTactics.id )) return
 
-        if (document.getElementById(`explore-${exploreActiveMember}-member`).classList.contains("member-inactive")) return;
+        if (document.getElementById(`explore-team-member-${exploreActiveMember}-spriteData`).classList.contains("member-inactive")) return;
         
     }
 
@@ -575,20 +607,32 @@ function setPkmnTeam(){
     
     div.id = `explore-${i}-member`
 
+    let nickname = format(team[i].pkmn.id)
+    if (pkmn[team[i].pkmn.id].nickname) nickname = pkmn[team[i].pkmn.id].nickname
 
-    let pkmnName = `${format(team[i].pkmn.id)} <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[team[i].pkmn.id].level}</span>`
-    if (pkmn[team[i].pkmn.id].shiny) pkmnName = `${format(team[i].pkmn.id)} <span style="color:#FF4671;">✦</span> <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[team[i].pkmn.id].level}</span>`
+    let pkmnName = `${nickname} <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[team[i].pkmn.id].level}</span>`
+    if (pkmn[team[i].pkmn.id].shiny) pkmnName = `${nickname} <span style="color:#FF4671;">✦</span> <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[team[i].pkmn.id].level}</span>`
 
 
     let pkmnSprite = `<img class="sprite-trim" src="img/pkmn/sprite/${team[i].pkmn.id}.png" id="explore-team-member-${i}-sprite">`
     if (pkmn[team[i].pkmn.id].shiny) pkmnSprite = `<img class="sprite-trim" src="img/pkmn/shiny/${team[i].pkmn.id}.png" id="explore-team-member-${i}-sprite">`
     if (pkmn[team[i].pkmn.id].shiny && pkmn[team[i].pkmn.id].shinyDisabled == true) pkmnSprite = `<img class="sprite-trim" src="img/pkmn/sprite/${team[i].pkmn.id}.png" id="explore-team-member-${i}-sprite">`
 
+
+    let decorSprite = ""
+    if (pkmn[team[i].pkmn.id].decor) {
+        const decorData = pkmn[team[i].pkmn.id].decor
+        decorSprite = `<img class="sprite-decor" src="img/decor/${decorData.decor}.png" 
+                    style="position: absolute; left: ${decorData.x}px; top: ${decorData.y}px; pointer-events: none;">`
+    }
+
+
     div.innerHTML = `
     <div class="team-held-item" id="team-${i}-held-item"></div>
     <div class="team-buff-list" id="team-member-${i}-buff-list"></div>
-    <div class="explore-sprite" id="explore-team-member-${i}-spriteData">
-            ${pkmnSprite}
+    <div class="explore-sprite sprite-box" id="explore-team-member-${i}-spriteData" style="animation: pkmn-active 0.5s infinite; z-index:1">
+    ${decorSprite}
+    ${pkmnSprite}
             </div>
 
             <div class="explore-header-infobox">
@@ -762,6 +806,10 @@ function updatePreviewTeam(){
             if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===2 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) nameTag += ` ⛔`
             if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===3 && (returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="A" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="B" && returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="C" &&  returnPkmnDivision(pkmn[currentTeam[i].pkmn])!="D")) nameTag += ` ⛔`
 
+            if (saved.gamemodNuzlocke == true && pkmn[currentTeam[i].pkmn].nuzlocked == true) {nameTag += ` ☠️`;}
+
+
+
             let restrictedError = false
             if (currentTeam[i].pkmn == undefined) continue
             let restricedActive = 0
@@ -774,19 +822,35 @@ function updatePreviewTeam(){
             if (restricedActive>1) restrictedError = true
             if (restrictedError) nameTag += ` ⛔`
 
-            let pkmnName = `${format(currentTeam[i].pkmn)} ${nameTag} <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[ currentTeam[i].pkmn ].level}</span>`
-            if (pkmn[currentTeam[i].pkmn].shiny) pkmnName = `${format(currentTeam[i].pkmn)} ${nameTag} <span style="color:#FF4671;">✦</span> <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[ currentTeam[i].pkmn ].level}</span>`
+
+            let nickname = format(currentTeam[i].pkmn)
+            if (pkmn[currentTeam[i].pkmn].nickname) nickname = pkmn[currentTeam[i].pkmn].nickname
+
+            let pkmnName = `${nickname} ${nameTag} <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[ currentTeam[i].pkmn ].level}</span>`
+            if (pkmn[currentTeam[i].pkmn].shiny) pkmnName = `${nickname} ${nameTag} <span style="color:#FF4671;">✦</span> <span class="explore-pkmn-level" id="explore-${i}-lvl">lvl ${pkmn[ currentTeam[i].pkmn ].level}</span>`
+
 
             let pkmnSprite = `<img class="sprite-trim" src="img/pkmn/sprite/${currentTeam[i].pkmn}.png" id="explore-team-member-${i}-sprite">`
             if (pkmn[currentTeam[i].pkmn].shiny) pkmnSprite = `<img class="sprite-trim" src="img/pkmn/shiny/${currentTeam[i].pkmn}.png" id="explore-team-member-${i}-sprite">`
             if (pkmn[currentTeam[i].pkmn].shiny && pkmn[currentTeam[i].pkmn].shinyDisabled == true) pkmnSprite = `<img class="sprite-trim" src="img/pkmn/sprite/${currentTeam[i].pkmn}.png" id="explore-team-member-${i}-sprite">`
 
+            let decorSprite = ""
+            if (pkmn[currentTeam[i].pkmn].decor) {
+                const decorData = pkmn[currentTeam[i].pkmn].decor
+                decorSprite = `<img class="sprite-decor" src="img/decor/${decorData.decor}.png" 
+                            style="position: absolute; left: ${decorData.x}px; top: ${decorData.y}px; pointer-events: none;">`
+            }
+
+
             div.innerHTML = `
                 <div class="team-member-slotnumber">#0${slotNumber}</div>
                 <div class="team-held-item" id="team-${i}-held-item" data-item="${currentTeam[i].item}">${itemDiv}</div>
-                <div class="explore-sprite" id="explore-team-member-${i}-spriteData">
+                
+                <div class="explore-sprite sprite-box" id="explore-team-member-${i}-spriteData" style="position: relative; animation: pkmn-active 0.5s infinite;">
+                ${decorSprite}
                 ${pkmnSprite}
                 </div>
+
                 <div class="explore-header-infobox">
                 <div class="explore-header-hpbox">
                 <span style="color: white;">${pkmnName}</span>
